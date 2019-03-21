@@ -1,0 +1,4 @@
+Account = {
+	"AccountID":'',
+	"LoginPassword":'',
+}
