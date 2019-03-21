@@ -15,6 +15,7 @@ browser = Chrome(options=options)
 # ログインページにアクセス
 url_login = "https://www.benefit401k.com/customer/RkDCMember/Common/JP_D_BFKLogin.aspx"
 browser.get(url_login)
+WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.ID, "txtUserID")) and EC.presence_of_element_located((By.ID, "txtPassword")))
 print("ログインページにアクセスしました")
 
 # テキストボックスにユーザーネームを入力
@@ -32,14 +33,14 @@ frm.click()
 print("情報を入力してログインボタンを押しました")
 
 # ページのロード完了まで待機
-WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.ID, "D_Chart_Asset:Chart1Map")))
+WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#pnlShisanJyoukyou")))
 print("ログインできました")
 
 # 資産状況のページへ遷移
 a = browser.find_element_by_id("D_Header1_uscD_CategoryMenu1_rptFunctionMenuTable__ctl2_btnMenuData")
 a.click()
 
-WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#D_Header1_lblKojinCurrencyUnit01")))
+WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#D_Header1_lblKojinCurrencyUnit01")))
 print("資産状況のページへ移動しました")
 
 page_source = browser.page_source
@@ -91,8 +92,6 @@ f.close()
 
 logout = browser.find_element_by_id("D_Header1_btnLogout")
 logout.click()
-print("ログアウトしました")
 
 browser.quit()
-
-print("ブラウザを閉じました")
+print("ログアウトしてブラウザを終了しました")
